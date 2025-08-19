@@ -1,8 +1,9 @@
 export const profile = {
-  _id: "2342342342",
+  _id: "68a4c480acf7ad377b0201e3",
   name: "Boolean",
-  title: "Next.js & Expo Developer, Full-Stack APP",
-  resume: "https://boolean405.vercel.app/resume.pdf",
+  title: "Full-Stack Developer - Next.js, Node.js & Expo",
+  resume:
+    "https://docs.google.com/uc?export=download&id=1STxN8HPFz2pIWAF_64rQbLSdc4tN_X-W",
   github: "https://github.com/yourhandle",
   linkedin: "https://www.linkedin.com/in/yourhandle",
   email: "you@example.com",

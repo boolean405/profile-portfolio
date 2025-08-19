@@ -27,7 +27,6 @@ export default async function Hero() {
   const imgSrc = profile.image?.startsWith("http")
     ? profile.image
     : `/profile-image.jpg`;
-  console.log(imgSrc);
 
   return (
     <section className="relative overflow-hidden">

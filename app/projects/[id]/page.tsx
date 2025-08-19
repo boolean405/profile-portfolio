@@ -1,18 +1,19 @@
-// src/app/projects/[slug]/page.tsx
-import { projects } from "@/data/projects";
+// src/app/projects/[id]/page.tsx
 import Image from "next/image";
+import { projects } from "@/data/projects";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return projects.map((p) => ({ id: p._id }));
 }
 
-export default function ProjectDetail({
+export default async function ProjectDetail({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ id: string }>;
 }) {
-  const project = projects.find((p) => p.slug === params.slug);
+  const { id } = await params;
+  const project = projects.find((p) => p._id === id);
   if (!project) return notFound();
   return (
     <div className="container-max space-y-6">

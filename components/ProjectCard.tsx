@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function ProjectCard({ project, compact = false }: Props) {
-  // de-du  // de-dupe tags and make stable keys based on slug + tag + index
+  // de-du  // de-dupe tags and make stable keys based on id + tag + index
   const tags = Array.from(new Set(project.tags));
 
   return (
@@ -32,7 +32,7 @@ export function ProjectCard({ project, compact = false }: Props) {
 
       <div className={project.image ? (compact ? "pt-4" : "pt-5") : ""}>
         <h3 className={`font-semibold ${compact ? "text-lg" : "text-xl"} mb-1`}>
-          <Link href={`/projects/${project.slug}`} className="hover:underline">
+          <Link href={`/projects/${project._id}`} className="hover:underline">
             {project.title}
           </Link>
         </h3>

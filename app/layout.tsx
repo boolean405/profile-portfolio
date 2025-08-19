@@ -4,39 +4,32 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Providers } from "@/components/Providers";
-import { headers } from "next/headers";
 
-/** Resolve the current request origin behind proxies/CDNs */
-async function getRequestOrigin() {
-  const h = headers(); // sync, NOT a Promise
-  const proto = (await h).get("x-forwarded-proto") ?? "http";
-  const host = (await h).get("x-forwarded-host") ?? (await h).get("host");
-  // Fallback for local dev or unusual setups
-  if (!host) return "http://localhost:3000";
-  return `${proto}://${host}`;
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.NODE_ENV === "development" ? "http://localhost:3000" : "");
+
+if (!SITE_URL && process.env.NODE_ENV !== "development") {
+  throw new Error(
+    "NEXT_PUBLIC_SITE_URL must be set to an absolute URL in production"
+  );
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const siteUrl = await getRequestOrigin();
-
-  return {
-    title: { default: "Boolean — Portfolio", template: "%s · Boolean" },
+export const metadata: Metadata = {
+  title: { default: "Boolean — Portfolio", template: "%s · Boolean" },
+  description: "Full-stack developer portfolio: projects, resume, and contact.",
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    title: "Boolean — Portfolio",
     description:
       "Full-stack developer portfolio: projects, resume, and contact.",
-    metadataBase: new URL(siteUrl),
-    openGraph: {
-      title: "Boolean — Portfolio",
-      description:
-        "Full-stack developer portfolio: projects, resume, and contact.",
-      url: siteUrl,
-      siteName: "Boolean",
-      // If you use a relative path, Next will resolve it against metadataBase:
-      images: ["/profile-image.jpg"],
-      type: "website",
-    },
-    icons: { icon: "/favicon.ico" },
-  };
-}
+    url: SITE_URL,
+    siteName: "Boolean",
+    images: ["/profile-image.jpg"], // resolved against metadataBase
+    type: "website",
+  },
+  icons: { icon: "/favicon.ico" },
+};
 
 export default function RootLayout({
   children,

@@ -1,4 +1,3 @@
-// src/app/api/profile/route.ts
 import { NextRequest } from "next/server";
 import { connectDB } from "@/lib/db";
 import Profile from "@/models/Profile";
