@@ -3,11 +3,6 @@ import JoiBase from "joi";
 
 export const Joi = JoiBase;
 
-// Common pieces
-const url = Joi.string().uri({ scheme: ["http", "https"] });
-const nonEmpty = Joi.string().trim().min(1);
-
-// src/lib/errors.ts
 export function toProblem(e: unknown): { status: number; body: unknown } {
   // Map Joi + Mongoose errors to consistent responses
   // Keep messages dev-friendly but safe for clients

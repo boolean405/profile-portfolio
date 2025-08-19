@@ -7,14 +7,15 @@ import { updateProfileSchema } from "../schema.tsschema";
 
 export async function GET(
   _req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   await connectDB();
   try {
-    if (!mongoose.isValidObjectId(params.id)) {
+    const { id } = await params;
+    if (!mongoose.isValidObjectId(id)) {
       return Response.json({ error: "INVALID_ID" }, { status: 400 });
     }
-    const doc = await Profile.findById(params.id).lean();
+    const doc = await Profile.findById(id).lean();
     return Response.json(doc, { status: doc ? 200 : 404 });
   } catch (e) {
     const { status, body } = toProblem(e);
@@ -24,11 +25,12 @@ export async function GET(
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   await connectDB();
   try {
-    if (!mongoose.isValidObjectId(params.id)) {
+    const { id } = await params;
+    if (!mongoose.isValidObjectId(id)) {
       return Response.json({ error: "INVALID_ID" }, { status: 400 });
     }
 
@@ -40,7 +42,7 @@ export async function PATCH(
       stripUnknown: true,
     });
 
-    const updated = await Profile.findByIdAndUpdate(params.id, value, {
+    const updated = await Profile.findByIdAndUpdate(id, value, {
       new: true,
       runValidators: true, // let Mongoose enforce schema constraints too
     }).lean();
