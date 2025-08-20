@@ -2,27 +2,10 @@
 import Image from "next/image";
 import { Button } from "@/components/Button";
 import { TechBadge } from "@/components/TechBadge";
-import { Profile } from "@/types";
-import { profile as profileData } from "@/data/profile";
-import { headers } from "next/headers";
-
-async function getProfile() {
-  const host = (await headers()).get("host");
-  const protocol = process.env.NODE_ENV === "development" ? "http" : "https";
-
-  const res = await fetch(
-    `${protocol}://${host}/api/profile?email=boolean405@gmail.com`,
-    { cache: "no-store" }
-  );
-
-  if (!res.ok) return null;
-  return res.json();
-}
+import { getProfile } from "@/services/profile";
 
 export default async function Hero() {
-  let profile: Profile | null = null;
-  profile = await getProfile();
-  if (!profile) profile = profileData;
+  const profile = await getProfile();
 
   const imgSrc = profile.image?.startsWith("http")
     ? profile.image

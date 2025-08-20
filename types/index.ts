@@ -3,13 +3,12 @@ import { IconType } from "react-icons";
 export type Project = {
   _id: string; // unique identifier
   title: string;
-  slug: string;
-  description: string;
-  long?: string;
+  shortDesc: string;
+  longDesc: string;
   tags: string[];
-  image?: string;
-  demo?: string;
-  github?: string;
+  images: string[];
+  live?: string;
+  source?: string;
 };
 
 export type SocialLink = {
@@ -25,13 +24,14 @@ export interface Profile {
   _id?: string;
   name: string;
   title: string;
+  description: string;
+  bio: string;
+  email: string;
   resume: string;
   github: string;
   linkedin: string;
-  email: string;
-  image: string; // e.g. "profile-image.jpg" (served from /public)
-  bio: string;
+  x: string;
+  website: string;
+  image: string;
   skills: string[];
-  createdAt?: string;
-  updatedAt?: string;
 }

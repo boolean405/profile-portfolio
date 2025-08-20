@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
 import { personJsonLd } from "@/lib/seo";

@@ -7,6 +7,8 @@ export const createProfileSchema = Joi.object({
   resume: Joi.string().uri().required(),
   github: Joi.string().uri().optional(),
   linkedin: Joi.string().uri().optional(),
+  x: Joi.string().uri().optional(),
+  website: Joi.string().uri().optional(),
   email: Joi.string().email().required(),
   image: Joi.string().trim().optional(), // allow path or URL; you can harden with regex if needed
   bio: Joi.string().trim().max(2000).optional(),
@@ -22,10 +24,12 @@ export const updateProfileSchema = createProfileSchema
       "resume",
       "github",
       "linkedin",
+      "x",
       "email",
       "image",
       "bio",
       "skills",
+      "website",
     ],
     (schema) => schema.optional()
   )

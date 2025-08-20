@@ -18,9 +18,9 @@ export function ProjectCard({ project, compact = false }: Props) {
     <article
       className={`card card-hover overflow-hidden ${compact ? "p-4" : "p-5"}`}
     >
-      {project.image && (
+      {project.images.length && (
         <Image
-          src={project.image}
+          src={project.images[0]}
           alt={project.title}
           width={1200}
           height={630}
@@ -30,7 +30,7 @@ export function ProjectCard({ project, compact = false }: Props) {
         />
       )}
 
-      <div className={project.image ? (compact ? "pt-4" : "pt-5") : ""}>
+      <div className={project.images.length ? (compact ? "pt-4" : "pt-5") : ""}>
         <h3 className={`font-semibold ${compact ? "text-lg" : "text-xl"} mb-1`}>
           <Link href={`/projects/${project._id}`} className="hover:underline">
             {project.title}
@@ -38,7 +38,7 @@ export function ProjectCard({ project, compact = false }: Props) {
         </h3>
 
         <p className="text-sm text-[rgb(var(--muted))] line-clamp-2 mb-2">
-          {project.description}
+          {project.shortDesc}
         </p>
 
         <div className="flex flex-wrap gap-1">

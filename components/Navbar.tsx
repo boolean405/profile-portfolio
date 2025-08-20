@@ -1,25 +1,10 @@
 // src/components/Navbar.tsx
-"use client";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import { profile } from "@/data/profile";
+import { getProfile } from "@/services/profile";
 
-export function Navbar() {
-  const pathname = usePathname();
-
-  const link = (href: string, label: string) => (
-    <Link
-      href={href}
-      className={clsx(
-        "px-3 py-2 rounded-lg text-sm md:text-base",
-        pathname === href && "bg-black/5 dark:bg-white/10"
-      )}
-    >
-      {label}
-    </Link>
-  );
+export default async function Navbar() {
+  const profile = await getProfile();
 
   return (
     <header className="sticky top-0 z-50 bg-[rgb(var(--bg))]/80 backdrop-blur border-b border-black/10">
@@ -28,18 +13,13 @@ export function Navbar() {
           Boolean
         </Link>
         <nav className="hidden md:flex items-center gap-2">
-          {link("/", "Home")}
-          {/* Use an anchor to scroll to the projects section on the same page */}
-          <a
-            href="#projects"
-            className="px-3 py-2 rounded-lg text-sm md:text-base"
-          >
+          <Link href="/" className="px-3 py-2 rounded-lg text-sm md:text-base">
+            Home
+          </Link>
+          <a href="#projects" className="px-3 py-2 rounded-lg text-sm md:text-base">
             Projects
           </a>
-          <a
-            href="#contact"
-            className="px-3 py-2 rounded-lg text-sm md:text-base"
-          >
+          <a href="#contact" className="px-3 py-2 rounded-lg text-sm md:text-base">
             Contact
           </a>
           <a
