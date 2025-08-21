@@ -13,6 +13,7 @@
   /* Extended tokens */
   --ring: 59 130 246; /* sky-500 for focus */
   --card: 248 250 252; /* slate-50-ish surface for contrast */
+  --card-strong: 241 245 249; /* slate-100 */
   --border: 0 0 0 / 0.12; /* slightly stronger border than 8% */
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   --radius: 16px;
@@ -26,6 +27,7 @@
 
   --ring: 56 189 248; /* cyan-400 */
   --card: 9 9 11; /* zinc-950-ish */
+  --card-strong: 38 50 74; /* slate-800/700 blend */
   --border: 255 255 255 / 0.1;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }

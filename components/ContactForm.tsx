@@ -1,18 +1,34 @@
-// src/components/ContactForm.tsx
 "use client";
 import { useState } from "react";
+import { motion, AnimatePresence, type Variants, easeOut } from "framer-motion";
+
+const container: Variants = {
+  hidden: { opacity: 1 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+  },
+};
+
+const item: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: easeOut }, // 👈 use imported easing fn
+  },
+};
 
 export function ContactForm() {
   const [status, setStatus] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
-    // Capture the form element BEFORE any await (React event pooling)
     const formEl = e.currentTarget;
     const form = new FormData(formEl);
-
     setStatus("Sending…");
+    setSubmitting(true);
 
     try {
       const res = await fetch("/api/contact", {
@@ -26,7 +42,6 @@ export function ContactForm() {
         cache: "no-store",
       });
 
-      // Safer parse in case response isn't JSON
       let payload: unknown = null;
       const ct = res.headers.get("content-type") || "";
       try {
@@ -39,7 +54,7 @@ export function ContactForm() {
 
       if (res.ok) {
         setStatus("Message sent!");
-        formEl.reset(); // use saved reference
+        formEl.reset();
       } else {
         const msg =
           (payload as { error?: string })?.error ||
@@ -49,12 +64,22 @@ export function ContactForm() {
       }
     } catch (error: unknown) {
       setStatus(error instanceof Error ? error.message : "Unexpected error");
+    } finally {
+      setSubmitting(false);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 w-full">
-      <input
+    <motion.form
+      onSubmit={handleSubmit}
+      className="space-y-4 w-full"
+      variants={container}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.25 }}
+    >
+      <motion.input
+        variants={item}
         name="name"
         placeholder="Your name"
         required
@@ -65,7 +90,8 @@ export function ContactForm() {
              focus:ring-2 focus:ring-[rgb(var(--brand))]"
       />
 
-      <input
+      <motion.input
+        variants={item}
         type="email"
         name="email"
         placeholder="you@example.com"
@@ -76,7 +102,9 @@ export function ContactForm() {
              p-3 focus:outline-none 
              focus:ring-2 focus:ring-[rgb(var(--brand))]"
       />
-      <textarea
+
+      <motion.textarea
+        variants={item}
         name="message"
         placeholder="Tell me about your project…"
         required
@@ -87,10 +115,31 @@ export function ContactForm() {
              p-3 focus:outline-none 
              focus:ring-2 focus:ring-[rgb(var(--brand))]"
       />
-      <button className="rounded-xl bg-[rgb(var(--brand))] text-white px-5 py-2 font-medium">
-        Send
-      </button>
-      {status && <p className="mt-3 text-sm">{status}</p>}
-    </form>
+
+      <motion.button
+        variants={item}
+        disabled={submitting}
+        className="rounded-xl bg-[rgb(var(--brand))] text-white px-5 py-2 font-medium disabled:opacity-70"
+        type="submit"
+        whileTap={{ scale: 0.98 }}
+      >
+        {submitting ? "Sending…" : "Send"}
+      </motion.button>
+
+      <AnimatePresence>
+        {status && (
+          <motion.p
+            key={status}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.25 }}
+            className="mt-3 text-sm"
+          >
+            {status}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </motion.form>
   );
 }

@@ -3,11 +3,14 @@ import Image from "next/image";
 import { Button } from "@/components/Button";
 import { TechBadge } from "@/components/TechBadge";
 import { profile } from "@/data/profile";
-// import { getProfile } from "@/services/profile";
+
+// 👇 client bits
+import AnimatedTitle from "@/components/AnimatedTitle";
+import AnimatedReveal from "@/components/AnimatedReveal";
+import AnimatedParagraph from "./AnimatedParagraph";
+import AnimatedGroup from "./AnimatedGroup";
 
 export default async function Hero() {
-  // const profile = await getProfile();
-
   return (
     <section className="relative overflow-hidden">
       {/* gradient blobs */}
@@ -22,28 +25,33 @@ export default async function Hero() {
 
       <div className="container-max py-10">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
-          {/* Title + bio + actions */}
           <div className="flex-1 space-y-6 text-center md:text-left">
-            {/* Title + circle avatar side-by-side */}
+            {/* Title + avatar */}
             <div className="flex flex-col md:flex-row items-center gap-4">
-              <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
+              <AnimatedTitle className="text-4xl md:text-6xl font-extrabold tracking-tight">
                 {profile.title}
-              </h1>
-              <Image
-                src={profile.image} // place your image in /public
-                alt={`${profile.name} avatar`}
-                width={200}
-                height={200}
-                priority
-                className="rounded-full ring-2 ring-[rgb(var(--brand))] shadow-lg object-cover"
-              />
+              </AnimatedTitle>
+
+              <AnimatedReveal>
+                <Image
+                  src={profile.image}
+                  alt={`${profile.name} avatar`}
+                  width={400}
+                  height={400}
+                  priority
+                  className="rounded-full ring-2 ring-[rgb(var(--brand))] shadow-lg object-cover"
+                />
+              </AnimatedReveal>
             </div>
 
-            <p className="text-lg text-[rgb(var(--muted))] max-w-prose mx-auto md:mx-0">
+            <AnimatedParagraph
+              className="text-lg text-[rgb(var(--muted))] max-w-prose mx-auto md:mx-0"
+              staggerWords
+            >
               {profile.bio}
-            </p>
+            </AnimatedParagraph>
 
-            <div className="flex justify-center md:justify-start gap-3">
+            <AnimatedGroup>
               <Button as="a" href="#contact">
                 Contact Me
               </Button>
@@ -55,13 +63,13 @@ export default async function Hero() {
               >
                 Download Resume
               </Button>
-            </div>
+            </AnimatedGroup>
 
-            <div className="flex flex-wrap justify-center md:justify-start gap-2 pt-2">
+            <AnimatedGroup>
               {profile.skills.map((t, i) => (
                 <TechBadge key={i} label={t} />
               ))}
-            </div>
+            </AnimatedGroup>
           </div>
         </div>
       </div>

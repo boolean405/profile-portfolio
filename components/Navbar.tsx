@@ -1,45 +1,45 @@
-// src/components/Navbar.tsx
-import Link from "next/link";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { profile } from "@/data/profile";
-// import { getProfile } from "@/services/profile";
+import AnimatedHeader from "@/components/AnimatedHeader";
+import AnimatedNavLinks from "@/components/AnimatedNavLinks";
+import HomeLink from "@/components/HomeLink";
+import MobileNav from "@/components/MobileNav";
 
 export default async function Navbar() {
-  // const profile = await getProfile();
+  const desktopItems = [
+    { href: "#projects", label: "Projects", isExternal: false },
+    { href: "#contact", label: "Contact", isExternal: false },
+    { href: profile.resume, label: "Download Resume", isExternal: false },
+  ];
+
+  // For mobile, prefer route-absolute anchors so it works from any page
+  const mobileItems = [
+    { href: "/#projects", label: "Projects" },
+    { href: "/#contact", label: "Contact" },
+    { href: profile.resume, label: "Download Resume", external: false },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[rgb(var(--bg))]/80 backdrop-blur border-b border-black/10">
+    <AnimatedHeader>
       <div className="container-max h-14 flex items-center justify-between">
-        <Link href="/" className="font-bold text-2xl">
-          Boolean
-        </Link>
+        <HomeLink className="font-bold text-2xl">Boolean</HomeLink>
+
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-2">
-          <Link href="/" className="px-3 py-2 rounded-lg text-sm md:text-base">
+          <HomeLink className="px-3 py-2 rounded-lg text-sm md:text-base">
             Home
-          </Link>
-          <a
-            href="#projects"
-            className="px-3 py-2 rounded-lg text-sm md:text-base"
-          >
-            Projects
-          </a>
-          <a
-            href="#contact"
-            className="px-3 py-2 rounded-lg text-sm md:text-base"
-          >
-            Contact
-          </a>
-          <a
-            href={profile.resume}
-            className="px-3 py-2 rounded-lg text-sm md:text-base"
-          >
-            Download Resume
-          </a>
+          </HomeLink>
+          <AnimatedNavLinks items={desktopItems} />
         </nav>
+
+        {/* Right: theme + mobile menu trigger */}
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <div className="md:hidden">
+            <MobileNav items={mobileItems} />
+          </div>
         </div>
       </div>
-    </header>
+    </AnimatedHeader>
   );
 }

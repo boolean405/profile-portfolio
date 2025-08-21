@@ -1,5 +1,3 @@
-// src/data/projects.ts
-
 import { Project } from "@/types";
 
 export const projects: Project[] = [
@@ -81,9 +79,9 @@ export const projects: Project[] = [
   },
   {
     _id: "3",
-    title: "Node.js API Project",
+    title: "Node.js Express E-commerce API",
     shortDesc:
-      "Production-ready Express API with MongoDB/Mongoose, JWT auth, Joi validation, Redis, and Socket.IO.",
+      "Fast, secure, and maintainable REST API for an e-commerce backend built with Node.js, Express, MongoDB/Mongoose, Joi validation, JWT auth with refresh rotation, Redis caching/queues (ioredis), Socket.IO for realtime events, and express-fileupload for media uploads.",
     longDesc:
       "A modular Node.js REST API built with Express 4, MongoDB/Mongoose 8, and JWT authentication. Features role/permit access control, product/catalog endpoints (categories, subcategories, tags, deliveries, products, orders), file uploads via express-fileupload, and Redis-backed sessions/cache. Validation is Joi-first across routes, with centralized error handling and environment-driven config (dotenv). Includes a Socket.IO namespace (api/chat) for real-time messaging with token gating via jwt.verify and Redis lookups, plus a migration bootstrap (defaultDataMigrate) to seed initial roles/permits/users. Clean architecture with separate routers, utils (validator, helper, redis), and a watch-mode dev workflow.",
     tags: [

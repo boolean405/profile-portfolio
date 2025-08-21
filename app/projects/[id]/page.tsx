@@ -1,11 +1,14 @@
 import { notFound } from "next/navigation";
-
 import { projects } from "@/data/projects";
 import ProjectGallery from "@/components/ProjectGallery";
-import TagBadge from "@/components/TagBadge";
 import ExpandableText from "@/components/ExpandableText";
 
-export async function generateStaticParams() {
+// new imports
+import ProjectHeaderAnimated from "@/components/ProjectHeaderAnimated";
+import InViewFadeUp from "@/components/InViewFadeUp";
+import ProjectSidebarCard from "@/components/ProjectSidebarCard";
+
+export function generateStaticParams() {
   return projects.map((p) => ({ id: p._id }));
 }
 
@@ -22,78 +25,39 @@ export default async function ProjectDetail({
 
   return (
     <div className="container-max space-y-8 md:space-y-10">
-      {/* Header */}
-      <header className="space-y-4">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
-          {project.title}
-        </h1>
-        {project.shortDesc && (
-          <p className="text-[rgb(var(--muted))] text-base md:text-lg">
-            {project.shortDesc}
-          </p>
-        )}
-        {project.tags?.length ? (
-          <div className="flex flex-wrap gap-2 pt-1">
-            {project.tags.map((t) => (
-              <TagBadge key={t}>{t}</TagBadge>
-            ))}
-          </div>
-        ) : null}
-      </header>
+      {/* Header (animated) */}
+      <ProjectHeaderAnimated
+        title={project.title}
+        shortDesc={project.shortDesc}
+        tags={project.tags}
+      />
 
-      {/* Gallery */}
+      {/* Gallery (animated reveal) */}
       {hasImages ? (
-        <ProjectGallery images={project.images} alt={project.title} />
+        <InViewFadeUp>
+          <ProjectGallery images={project.images} alt={project.title} />
+        </InViewFadeUp>
       ) : (
-        <div className="rounded-2xl border border-black/10 bg-[rgb(var(--muted))/0.06] p-6 text-[rgb(var(--muted))]">
-          No images available.
-        </div>
+        <InViewFadeUp>
+          <div className="rounded-2xl border border-[rgb(var(--border))] bg-[rgb(var(--muted))/0.06] p-6 text-[rgb(var(--muted))]">
+            No images available.
+          </div>
+        </InViewFadeUp>
       )}
 
-      {/* Body */}
+      {/* Body + Sidebar */}
       <section className="grid gap-8 md:grid-cols-[1fr_320px]">
-        <div className="max-w-none text-[rgb(var(--foreground))]">
-          {/* Long description – expandable */}
+        <InViewFadeUp className="max-w-none text-[rgb(var(--fg))]">
           {project.longDesc && (
             <ExpandableText
               text={project.longDesc}
-              collapsedHeight={100} // tweak as you like (px)
+              collapsedHeight={100}
               className="prose"
             />
           )}
-        </div>
+        </InViewFadeUp>
 
-        {/* Sidebar card remains the same */}
-        <aside className="h-max rounded-2xl border border-black/10 bg-white p-5 shadow-sm dark:bg-[rgb(var(--card))]">
-          <div className="space-y-4">
-            {/* Buttons */}
-            <div className="flex flex-col gap-3">
-              {/* Live (Primary) */}
-              {project.live && (
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--foreground))] shadow-sm transition hover:bg-[rgb(var(--muted))/0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--primary))]/40"
-                >
-                  Live ↗
-                </a>
-              )}
-
-              {/* Source (Outline / Neutral) */}
-              {project.source && (
-                <a
-                  href={project.source}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--foreground))] shadow-sm transition hover:bg-[rgb(var(--muted))/0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--primary))]/40"
-                >
-                  Source Code ↗
-                </a>
-              )}
-            </div>
-          </div>
-        </aside>
+        <ProjectSidebarCard live={project.live} source={project.source} />
       </section>
     </div>
   );
