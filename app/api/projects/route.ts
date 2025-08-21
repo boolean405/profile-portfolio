@@ -4,14 +4,14 @@ import Project from "@/models/Project";
 import { toProblem } from "@/lib/joi";
 import { createProjectSchema } from "./schema";
 
-function parseSort(sort?: string) {
-  // e.g. "updatedAt:desc" or "title:asc"
-  if (!sort) return { updatedAt: -1 };
-  const [field, dirRaw] = sort.split(":");
-  const dir = dirRaw?.toLowerCase() === "asc" ? 1 : -1;
-  const allow = new Set(["updatedAt", "title"]);
-  return allow.has(field) ? { [field]: dir } : { updatedAt: -1 };
-}
+// function parseSort(sort?: string) {
+//   // e.g. "updatedAt:desc" or "title:asc"
+//   if (!sort) return { updatedAt: -1 };
+//   const [field, dirRaw] = sort.split(":");
+//   const dir = dirRaw?.toLowerCase() === "asc" ? 1 : -1;
+//   const allow = new Set(["updatedAt", "title"]);
+//   return allow.has(field) ? { [field]: dir } : { updatedAt: -1 };
+// }
 
 export async function GET(req: NextRequest) {
   await connectDB();
@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
       100,
       Math.max(1, Number(searchParams.get("limit") || "12"))
     );
-    const sort = parseSort(searchParams.get("sort") || undefined);
+    // const sort = parseSort(searchParams.get("sort") || undefined);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const filter: any = {};
@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
     const skip = (page - 1) * limit;
 
     const [data, total] = await Promise.all([
-      Project.find(filter).sort(sort).skip(skip).limit(limit).lean(),
+      Project.find(filter).skip(skip).limit(limit).lean(),
       Project.countDocuments(filter),
     ]);
 

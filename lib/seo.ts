@@ -4,13 +4,14 @@ export function personJsonLd() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Bo Bo Aung (Boolean)",
-    url: "https://your-domain.com",
-    image: "https://your-domain.com/avatar.jpg",
+    url: "https://boolean405.vercel.app",
+    image: "https://boolean405.vercel.app/profile/boolean405-portfolio.jpg",
     sameAs: [
-      "https://github.com/yourhandle",
-      "https://www.linkedin.com/in/yourhandle/"
+      "https://github.com/boolean405",
+      "https://www.linkedin.com/in/boolean405",
+      "https://x.com/boolean405",
     ],
     jobTitle: "Full‑Stack Developer",
-    worksFor: { "@type": "Organization", name: "Freelance" }
+    worksFor: { "@type": "Organization", name: "Freelance" },
   };
 }

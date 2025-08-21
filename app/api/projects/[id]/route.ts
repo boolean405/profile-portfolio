@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { connectDB } from "@/lib/db";
 import Project from "@/models/Project";
 import { toProblem } from "@/lib/joi";
-import { updateProjectSchema } from "../schema.js";
+import { updateProjectSchema } from "../schema";
 
 function invalidId(id: string) {
   return !mongoose.isValidObjectId(id);
