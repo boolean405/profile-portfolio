@@ -1,12 +1,22 @@
 import { Section } from "@/components/Section";
 import { Button } from "@/components/Button";
 import { personJsonLd } from "@/lib/seo";
-import { projects } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import Hero from "@/components/Hero";
 import { ContactForm } from "@/components/ContactForm";
+import { projects as projectsData } from "@/data/projects";
+// import { fetchProjects } from "@/services/project";
 
-export default function HomePage() {
+export default async function HomePage() {
+  // const {
+  //   data: projects,
+  //   total,
+  //   hasMore,
+  // } = await fetchProjects({
+  //   page: 1,
+  //   limit: 6,
+  //   sort: "updatedAt:desc",
+  // });
   return (
     <>
       <script
@@ -20,7 +30,7 @@ export default function HomePage() {
       <Section title="Projects" subtitle="Some of my recent work.">
         <div id="projects" className="scroll-mt-24">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.slice(0, 6).map((p, i) => (
+            {projectsData.slice(0, 6).map((p, i) => (
               <ProjectCard key={i} project={p} />
             ))}
           </div>

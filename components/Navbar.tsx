@@ -1,10 +1,11 @@
 // src/components/Navbar.tsx
 import Link from "next/link";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { getProfile } from "@/services/profile";
+import { profile } from "@/data/profile";
+// import { getProfile } from "@/services/profile";
 
 export default async function Navbar() {
-  const profile = await getProfile();
+  // const profile = await getProfile();
 
   return (
     <header className="sticky top-0 z-50 bg-[rgb(var(--bg))]/80 backdrop-blur border-b border-black/10">
@@ -16,10 +17,16 @@ export default async function Navbar() {
           <Link href="/" className="px-3 py-2 rounded-lg text-sm md:text-base">
             Home
           </Link>
-          <a href="#projects" className="px-3 py-2 rounded-lg text-sm md:text-base">
+          <a
+            href="#projects"
+            className="px-3 py-2 rounded-lg text-sm md:text-base"
+          >
             Projects
           </a>
-          <a href="#contact" className="px-3 py-2 rounded-lg text-sm md:text-base">
+          <a
+            href="#contact"
+            className="px-3 py-2 rounded-lg text-sm md:text-base"
+          >
             Contact
           </a>
           <a

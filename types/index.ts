@@ -9,6 +9,8 @@ export type Project = {
   images: string[];
   live?: string;
   source?: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export type SocialLink = {
@@ -35,3 +37,11 @@ export interface Profile {
   image: string;
   skills: string[];
 }
+
+export type ProjectListResponse = {
+  data: Project[];
+  page: number;
+  limit: number;
+  total: number;
+  hasMore: boolean;
+};

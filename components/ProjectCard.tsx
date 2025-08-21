@@ -10,7 +10,7 @@ type Props = {
   compact?: boolean;
 };
 
-export function ProjectCard({ project, compact = false }: Props) {
+export function ProjectCard({ project, compact = true }: Props) {
   // de-du  // de-dupe tags and make stable keys based on id + tag + index
   const tags = Array.from(new Set(project.tags));
 
@@ -23,7 +23,7 @@ export function ProjectCard({ project, compact = false }: Props) {
           src={project.images[0]}
           alt={project.title}
           width={1200}
-          height={630}
+          height={600}
           sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
           className={`${compact ? "h-32" : "h-48"} w-full object-cover`}
           priority={compact} // small perf boost for above-the-fold previews

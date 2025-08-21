@@ -1,11 +1,12 @@
 import { SiGithub, SiLinkedin, SiGmail, SiX } from "react-icons/si";
 import { IoDocument } from "react-icons/io5";
 import { SocialLink } from "@/types";
-import { getProfile } from "@/services/profile";
+import { profile } from "@/data/profile";
+// import { getProfile } from "@/services/profile";
 
 export default async function Footer() {
   const year = new Date().getFullYear();
-  const profile = await getProfile();
+  // const profile = await getProfile();
 
   const socials: SocialLink[] = [
     {

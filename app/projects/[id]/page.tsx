@@ -74,7 +74,7 @@ export default async function ProjectDetail({
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-xl border border-[rgb(var(--primary))] bg-[rgb(var(--primary))] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--primary-foreground))] shadow-sm transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--primary))]/50"
+                  className="inline-flex items-center justify-center rounded-xl border border-[rgb(var(--border))] bg-[rgb(var(--card))] px-4 py-2.5 text-sm font-semibold text-[rgb(var(--foreground))] shadow-sm transition hover:bg-[rgb(var(--muted))/0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--primary))]/40"
                 >
                   Live ↗
                 </a>

@@ -8,6 +8,9 @@ const ProfileSchema = new Schema(
     resume: { type: String, required: true, trim: true },
     github: { type: String, trim: true },
     linkedin: { type: String, trim: true },
+    x: { type: String, trim: true },
+    website: { type: String, trim: true },
+    description: { type: String, trim: true },
     email: {
       type: String,
       required: true,

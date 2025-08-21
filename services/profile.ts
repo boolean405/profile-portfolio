@@ -1,4 +1,3 @@
-// src/services/profile.ts
 import { headers } from "next/headers";
 import { Profile } from "@/types";
 import { profile as fallbackProfile } from "@/data/profile";

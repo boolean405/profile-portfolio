@@ -2,14 +2,11 @@
 import Image from "next/image";
 import { Button } from "@/components/Button";
 import { TechBadge } from "@/components/TechBadge";
-import { getProfile } from "@/services/profile";
+import { profile } from "@/data/profile";
+// import { getProfile } from "@/services/profile";
 
 export default async function Hero() {
-  const profile = await getProfile();
-
-  const imgSrc = profile.image?.startsWith("http")
-    ? profile.image
-    : `/profile-image.jpg`;
+  // const profile = await getProfile();
 
   return (
     <section className="relative overflow-hidden">
@@ -33,7 +30,7 @@ export default async function Hero() {
                 {profile.title}
               </h1>
               <Image
-                src={imgSrc} // place your image in /public
+                src={profile.image} // place your image in /public
                 alt={`${profile.name} avatar`}
                 width={200}
                 height={200}
