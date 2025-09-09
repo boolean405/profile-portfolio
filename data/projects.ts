@@ -197,7 +197,7 @@ export const projects: Project[] = [
       "/projects/record-film-production/4.png",
     ],
     live: "https://recordfilmproduction.netlify.app",
-    source: "https://github.com/boolean405/movie-website",
+    source: "https://github.com/boolean405/record-film-production",
   },
   {
     _id: "7",
@@ -224,6 +224,6 @@ export const projects: Project[] = [
       "/projects/vue-shoppy/4.png",
     ],
     live: "https://shoppyproject.netlify.app/",
-    source: "https://github.com/boolean405/vue-shoppy-project",
+    source: "https://github.com/boolean405/vuejs-shoppy-project",
   },
 ];
