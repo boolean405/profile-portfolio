@@ -2,7 +2,7 @@ export const profile = {
   name: "Boolean",
   title: "Full-Stack Developer - Next.js, Node.js & Expo",
   resume:
-    "https://docs.google.com/uc?export=download&id=1STxN8HPFz2pIWAF_64rQbLSdc4tN_X-W",
+    "https://docs.google.com/uc?export=download&id=1Q6ij2qtULeK-PzhFoiWts_4kRDyTRLD9",
   github: "https://github.com/boolean405",
   linkedin: "https://www.linkedin.com/in/boolean405",
   x: "https://x.com/boolean405",
