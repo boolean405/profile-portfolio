@@ -1,12 +1,12 @@
 export const profile = {
-  name: "Boolean",
+  name: "Bo Bo Aung",
   title: "Full-Stack Developer - Next.js, Node.js & Expo",
   resume:
     "https://docs.google.com/uc?export=download&id=1Q6ij2qtULeK-PzhFoiWts_4kRDyTRLD9",
   github: "https://github.com/boolean405",
-  linkedin: "https://www.linkedin.com/in/boolean405",
+  linkedin: "https://www.linkedin.com/in/boboaung",
   x: "https://x.com/boolean405",
-  website: "https://boolean405.vercel.app",
+  website: "https://boboaung.vercel.app",
   description:
     "Portfolio of Bo Bo Aung (Boolean): projects, resume, and contact. Building scalable, real-time web and mobile applications.",
   email: "boolean405@gmail.com",
